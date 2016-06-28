@@ -5,8 +5,8 @@ const Promise = require('promise');
 const fs = require('fs');
 const write = Promise.denodeify(fs.writeFile);
 const colors = require('colors');
-const username = process.env.USER_NAME;
-const password = process.env.PASSWORD;
+const username = process.env.USER_NAME || 'none';
+const password = process.env.PASSWORD || 'none';
 const conf = require('./conf');
 
 if(!username) {
@@ -142,7 +142,7 @@ module.exports = {
         return tag(repo, branchName);
       })
       .then(function() {
-        return push(repo, branchName);
+        //return push(repo, branchName);
       })
     })
   }
