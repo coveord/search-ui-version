@@ -1,0 +1,17 @@
+{
+  "name": "search-ui-version",
+  "version": "1.0.0",
+  "description": "Automated script to create new release version of the Coveo search-ui",
+  "main": "index.js",
+  "scripts": {
+    "run": "node index.js"
+  },
+  "author": "Coveo <sandbox_JSUI@coveo.com> (http://source.coveo.com/)",
+  "license": "ISC",
+  "dependencies": {
+    "colors": "^1.1.2",
+    "nodegit": "^0.14.1",
+    "promise": "^7.1.1",
+    "travis-ci": "^2.1.0"
+  }
+}
