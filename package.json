@@ -4,7 +4,7 @@
   "description": "Automated script to create new release version of the Coveo search-ui",
   "main": "index.js",
   "scripts": {
-    "run": "node index.js"
+    "main": "node index.js"
   },
   "author": "Coveo <sandbox_JSUI@coveo.com> (http://source.coveo.com/)",
   "license": "ISC",
