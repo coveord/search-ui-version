@@ -4,6 +4,12 @@ node_js:
 - 4.2.2
 script:
 - npm run main
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - libstdc++-4.9-dev
 deploy:
   provider: npm
   email: sandbox_JSUI@coveo.com
