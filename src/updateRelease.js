@@ -35,7 +35,7 @@ module.exports = {
       return tag.tag(repo, versionBeingBuilt);
     })
     .then(function() {
-      return push.push(repo, branchName);
+      return push.push(repo, branchName, versionBeingBuilt);
     })
     .catch(function() {
       console.log('Error happened while updating release'.red)

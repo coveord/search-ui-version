@@ -14,16 +14,16 @@ if(!password) {
   process.exit(1);
 }
 
-var push = function(repo, branchName) {
+var push = function(repo, branchName, tagName) {
   return repo.getRemote('origin')
   .then(function(remote) {
-    return remote.push([`refs/heads/${branchName}:refs/heads/${branchName}`, 'refs/tags/*:refs/tags/*'], {
+    return remote.push([`refs/heads/${branchName}:refs/heads/${branchName}`, `refs/tags/${tagName}:refs/tags/${tagName}`], {
       callbacks: {
         certificateCheck : function() {
           return 1;
         },
         credentials: function(url, userName) {
-          return nodegit.Cred.userpassPlaintextNew(username, password);
+          return nodegit.Cred.userpassPlaintextNew(userName, password);
         },
         transferProgress: function(progress) {
           console.log('Progress:'.green, progress);
@@ -32,7 +32,7 @@ var push = function(repo, branchName) {
     })
   })
   .catch(function() {
-    console.log('An error occured while pushing to remote'.red);
+    console.log('An error occured while pushing to remote'.red, arguments);
   })
 }
 

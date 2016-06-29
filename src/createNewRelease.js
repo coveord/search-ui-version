@@ -39,7 +39,7 @@ module.exports = {
       return tag.tag(repo, versionBeingBuilt);
     })
     .then(function() {
-      return push.push(repo, branchName);
+      return push.push(repo, branchName, versionBeingBuilt);
     })
   }
 }
