@@ -4,6 +4,9 @@ node_js:
 - 4.2.2
 script:
 - npm run main
+cache:
+  directories:
+    - node_modules
 addons:
   apt:
     sources:
