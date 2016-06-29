@@ -31,10 +31,16 @@ nodegit.Clone(require('./conf').GIT_URL, pathToCloneTo)
       .finally(function() {
         if(branchExists) {
           console.log('Branch already exists : updating release'.green);
-          return updateRelease.update(repo, branchToBuild);
+          return updateRelease.update(repo, branchToBuild).then(function() {
+            console.log('Release updated'.green);
+            process.exit(0);
+          });
         } else {
           console.log('Branch does not exists : creating new release'.green);
-          return newRelease.create(repo, branchToBuild);
+          return newRelease.create(repo, branchToBuild).then(function() {
+            console.log('New release created'.green);
+            process.exit(0);
+          });
         }
       })
     })
