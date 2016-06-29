@@ -2,13 +2,18 @@
 const nodegit = require('nodegit');
 const path = require('path');
 const pathToCloneTo = path.resolve('./clone');
-const NewRelease = require('./createNewReleaseBranch');
+const newRelease = require('./src/createNewRelease');
+const updateRelease = require('./src/updateRelease');
+const colors = require('colors');
 
 var branchToBuild = process.env.BRANCH_NAME;
-if(!branchToBuild) {
-  branchToBuild = 'version-testing-release-script'
-}
 
+if(! branchToBuild) {
+  console.log('No $BRANCH_NAME set. Did you forget to configure the travis job correctly ?'.red);
+  process.exit(1);
+} else {
+  console.log(`Branch version detected : ${branchToBuild}`.green);
+}
 
 nodegit.Clone(require('./conf').GIT_URL, pathToCloneTo)
   .then(function(repo) {
@@ -21,11 +26,15 @@ nodegit.Clone(require('./conf').GIT_URL, pathToCloneTo)
       repo.getReference(`origin/${branchToBuild}`).then(function(ref) {
         branchExists = true;
       })
+      .catch(function() {
+      })
       .finally(function() {
         if(branchExists) {
-
+          console.log('Branch already exists : updating release'.green);
+          return updateRelease.update(repo, branchToBuild);
         } else {
-          NewRelease.create(repo, branchToBuild);
+          console.log('Branch does not exists : creating new release'.green);
+          return newRelease.create(repo, branchToBuild);
         }
       })
     })
