@@ -5,11 +5,12 @@ const version = require('./version');
 const tag = require('./tag');
 const commit = require('./commit');
 const push = require('./push');
+const signature = require('./signature');
 
 var createBranch = function(repo, branchName) {
   return repo.getMasterCommit()
   .then(function(commit) {
-    return repo.createBranch(branchName, commit, 0, repo.defaultSignature(), `Creating new branch branchName`).then(function() {
+    return repo.createBranch(branchName, commit, 0, signature.get(), `Creating new branch branchName`).then(function() {
       return repo.checkoutBranch(branchName);
     })
   })

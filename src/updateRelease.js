@@ -4,6 +4,7 @@ const tag = require('./tag');
 const commit = require('./commit');
 const push = require('./push');
 const colors = require('colors');
+const signature = require('./signature');
 
 var createBranch = function(repo, branchName) {
   return repo.getReference(`origin/${branchName}`)
