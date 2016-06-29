@@ -4,8 +4,6 @@ const colors = require('colors');
 const username = process.env.USER_NAME;
 const password = process.env.PASSWORD;
 
-console.log(process.env.USER_NAME)
-
 if(!username) {
   console.log('No username provided in $USER_NAME'.red);
   process.exit(1);
