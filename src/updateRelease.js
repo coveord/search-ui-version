@@ -12,7 +12,7 @@ var createBranch = function(repo, branchName) {
     return repo.getReferenceCommit(ref);
   })
   .then(function(commit) {
-    return repo.createBranch(branchName, commit, 0, repo.defaultSignature(), `Creating new branch branchName`).then(function() {
+    return repo.createBranch(branchName, commit, 0, signature.get(), `Creating new branch branchName`).then(function() {
       return repo.checkoutBranch(branchName);
     })
   })
