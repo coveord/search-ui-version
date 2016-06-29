@@ -17,7 +17,7 @@ if(!password) {
 var push = function(repo, branchName) {
   return repo.getRemote('origin')
   .then(function(remote) {
-    return remote.push([`refs/heads/${branchName}:refs/heads/${branchName}`], {
+    return remote.push([`refs/heads/${branchName}:refs/heads/${branchName}`, 'refs/tags/*:refs/tags/*'], {
       callbacks: {
         certificateCheck : function() {
           return 1;
