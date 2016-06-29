@@ -1,3 +1,4 @@
+'use strict';
 const nodegit = require('nodegit');
 const colors = require('colors');
 const username = process.env.USER_NAME;

@@ -1,3 +1,4 @@
+'use strict';
 const conf = require('../conf');
 const nodegit = require('nodegit');
 const signature = require('./signature');
