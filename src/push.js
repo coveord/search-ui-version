@@ -17,13 +17,13 @@ if(!password) {
 var push = function(repo, branchName) {
   return repo.getRemote('origin')
   .then(function(remote) {
-    return remote.push([`refs/heads/master:refs/heads/${branchName}`], {
+    return remote.push([`refs/heads/${branchName}:refs/heads/${branchName}`], {
       callbacks: {
         certificateCheck : function() {
           return 1;
         },
         credentials: function(url, userName) {
-          return nodegit.Cred.userpassPlaintextNew(process.env.USER_NAME, process.env.PASSWORD);
+          return nodegit.Cred.userpassPlaintextNew(username, password);
         },
         transferProgress: function(progress) {
           console.log('Progress:'.green, progress);
