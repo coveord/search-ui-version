@@ -3,7 +3,7 @@ const conf = require('../conf');
 const nodegit = require('nodegit');
 
 var getSignature = function() {
-  return nodegit.Signature.create(conf.GIT_AUTHOR, conf.GIT_EMAIL, new Date().getTime(), new Date().getTimezoneOffset());
+  return nodegit.Signature.now(conf.GIT_AUTHOR, conf.GIT_EMAIL);
 }
 
 module.exports = {
