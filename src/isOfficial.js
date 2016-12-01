@@ -1,3 +1,5 @@
+'use strict';
+
 const isOfficialBuild = function() {
   let isOfficial = false;
   if(process.env.IS_OFFICIAL != undefined) {
