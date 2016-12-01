@@ -6,6 +6,7 @@ const tag = require('./tag');
 const commit = require('./commit');
 const push = require('./push');
 const signature = require('./signature');
+const isOfficial = require('./isOfficial');
 
 var createBranch = function(repo, branchName) {
   return repo.getMasterCommit()
@@ -30,6 +31,10 @@ module.exports = {
       })
       .then(function(versionNumber) {
         versionBeingBuilt = versionNumber;
+        
+        if(!isOfficial()) {
+          versionBeingBuilt += '-beta';
+        }
         return versionBeingBuilt;
       })
     })

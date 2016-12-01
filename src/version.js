@@ -5,6 +5,7 @@ const Promise = require('promise');
 const write = Promise.denodeify(fs.writeFile);
 const colors = require('colors');
 
+
 var getPackageJson = function(repo) {
   return repo.getHeadCommit().then(function(commit) {
     return commit.getEntry('package.json');

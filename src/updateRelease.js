@@ -5,20 +5,25 @@ const commit = require('./commit');
 const push = require('./push');
 const colors = require('colors');
 const signature = require('./signature');
+const isOfficial = require('./isOfficial');
 
 var createBranch = function(repo, branchName) {
-  return repo.getReference(`origin/${branchName}`)
-  .then(function(ref) {
-    return repo.getReferenceCommit(ref);
-  })
-  .then(function(commit) {
-    return repo.createBranch(branchName, commit, 0, signature.get(), `Creating new branch branchName`).then(function() {
-      return repo.checkoutBranch(branchName);
+  if(branchName == 'master') {
+    return repo.checkoutBranch(branchName);
+  } else {
+    return repo.getReference(`origin/${branchName}`)
+      .then(function(ref) {
+        return repo.getReferenceCommit(ref);
+      })
+      .then(function(commit) {
+        return repo.createBranch(branchName, commit, 0, signature.get(), `Creating new branch branchName`).then(function() {
+          return repo.checkoutBranch(branchName);
+        })
+      })
+    .catch(function() {
+      console.log('Error found while creating branch'.red, arguments);
     })
-  })
-  .catch(function() {
-    console.log('Error found while creating branch'.red, arguments);
-  })
+  }
 }
 
 module.exports = {
@@ -30,6 +35,10 @@ module.exports = {
     })
     .then(function(versionBuilt) {
       versionBeingBuilt = versionBuilt;
+      
+      if(!isOfficial()) {
+        versionBeingBuilt += '-beta';
+      }
       return commit.commit(repo);
     })
     .then(function() {

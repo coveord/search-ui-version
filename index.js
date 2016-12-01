@@ -4,6 +4,7 @@ const path = require('path');
 const pathToCloneTo = path.resolve('./clone');
 const newRelease = require('./src/createNewRelease');
 const updateRelease = require('./src/updateRelease');
+const isOfficial = require('./src/isOfficial');
 const colors = require('colors');
 
 var branchToBuild = process.env.BRANCH_NAME;
@@ -13,6 +14,11 @@ if(! branchToBuild) {
   process.exit(1);
 } else {
   console.log(`Branch version detected : ${branchToBuild}`.green);
+  if(isOfficial()) {
+    console.log('!!! Doing an official build !!!'.rainbow);
+  } else {
+    console.log('Doing a beta build'.green);
+  }
 }
 
 nodegit.Clone(require('./conf').GIT_URL, pathToCloneTo)
