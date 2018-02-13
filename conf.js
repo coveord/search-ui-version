@@ -4,5 +4,5 @@ module.exports = {
   GIT_EMAIL : 'sandbox_JSUI@coveo.com',
   GIT_MESSAGE : 'Automatically created by Travis CI',
   TRAVIS_REPO : 'coveo/search-ui',
-  MAJOR_VERSION : 1
+  MAJOR_VERSION : 2
 }
