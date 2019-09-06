@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "colors": "^1.1.2",
-    "nodegit": "^0.14.1",
+    "nodegit": "^0.25.1",
     "promise": "^7.1.1",
     "travis-ci": "^2.1.0"
   }
