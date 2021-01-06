@@ -45,7 +45,36 @@ var bumpPatchVersion = function(repo) {
   })
 }
 
+const bumpMinorVersion = (repo) => {
+  return getLastMinorVersion()
+  .then(lastMinor => setPackageJsonVersion(repo, lastMinor + 1, 0))
+}
+
+const getLastMinorVersion = () => {
+  return new Promise(resolve => {
+    exec('npm show coveo-search-ui version', (error, stdout, stderr)=>{
+      if(error) {
+        console.log('Error while fetching last version of coveo-search-ui', error);
+        process.exit(1);
+      }
+      console.log('Last official version of coveo-search-ui is ', stdout);
+      const extracted = extractVersionMajorMinorPatch(stdout);
+      resolve(extracted.minor);
+    })
+  })
+}
+
+const extractVersionMajorMinorPatch = (completeVersion) => {
+  const regex = /([0-9]+)\.([0-9]+)\.([0-9]+)/;
+  const matches = completeVersion.match(regex);
+  return {
+    major : parseInt(matches[1], 10),
+    minor : parseInt(matches[2], 10),
+    patch : parseInt(matches[3], 10)
+  }
+}
+
 module.exports = {
-  setVersion : setPackageJsonVersion,
-  bumpPatchVersion : bumpPatchVersion
+  bumpPatchVersion,
+  bumpMinorVersion,
 }
