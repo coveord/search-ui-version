@@ -4,7 +4,7 @@ const fs = require('fs');
 const Promise = require('promise');
 const write = Promise.denodeify(fs.writeFile);
 const colors = require('colors');
-
+const exec = require('child_process').exec;
 
 var getPackageJson = function(repo) {
   return repo.getHeadCommit().then(function(commit) {
