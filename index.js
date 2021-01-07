@@ -10,7 +10,7 @@ const colors = require('colors');
 var branchToBuild = process.env.BRANCH_NAME;
 
 if(! branchToBuild) {
-  console.log('No $BRANCH_NAME set. Did you forget to configure the travis job correctly ?'.red);
+  console.log('No $BRANCH_NAME set. Did you forget to configure the job correctly ?'.red);
   process.exit(1);
 } else {
   console.log(`Branch version detected : ${branchToBuild}`.green);
